@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+    <button id="saveBtn">Save Data</button>
+    <script>
+  const scriptURL = "https://script.google.com/macros/s/AKfycbxgyRmIZttnwH_lVMmgSfTr9X5XplF6h_9RTGrA9Dv5PunSkkyGuwqwAmZmtunA1M39/exec"; // paste your Web App URL here
+
+  document.getElementById("saveBtn").addEventListener("click", () => {
+    const payload = { name: "John Doe", score: 95 };
+
+    fetch(scriptURL, {
+      method: "POST",
+      body: JSON.stringify(payload)
+    })
+    .then(res => res.text())
+    .then(msg => alert(msg))
+    .catch(err => console.error("Error:", err));
+  });
+
+  function doGet(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var values = sheet.getDataRange().getValues();
+  return ContentService.createTextOutput(JSON.stringify(values)).setMimeType(ContentService.MimeType.JSON);
+}
+
+
+</script>
+
+  </body>
+</html>
+
